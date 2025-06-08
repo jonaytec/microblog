@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/jonaytec/microblog.git'
+                git 'https://github.com/jonaytec/microblog.git', branch: 'main'
             }
         }
 
