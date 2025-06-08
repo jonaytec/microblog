@@ -27,12 +27,12 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('LocalSonarQube') {
+                withSonarQubeEnv('sonar-server') {
                     sh '''
                         $SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectKey=microblog \
-                        -Dsonar.sources=app \
-                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://44.210.111.19:9000 \
                         -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
