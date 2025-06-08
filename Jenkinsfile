@@ -1,14 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        // No need for jdk or nodejs in this case
-        // Only SonarQube Scanner is required
-        sonarRunner 'Default'
-    }
-
     environment {
-        SCANNER_HOME = tool 'Default'
+        SCANNER_HOME = tool 'sonar-scanner'
         SONAR_TOKEN = credentials('sonarqube-token')
     }
 
