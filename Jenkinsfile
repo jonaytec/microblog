@@ -5,18 +5,16 @@ pipeline {
         SONAR_TOKEN = credentials('sonarqube-token')  // This must exist in Jenkins credentials
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git url: 'https://github.com/jonaytec/microblog.git', branch: 'main'
-            }
-        }
+    tools {
+        sonarQubeScanner 'sonar-scanner'
+    }
 
+    stages {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('LocalSonarQube') {
                     sh """
-                    sonar-scanner \
+                        ${tool('sonar-scanner')}/bin/sonar-scanner \
                         -Dsonar.projectKey=microblog \
                         -Dsonar.sources=app \
                         -Dsonar.host.url=http://localhost:9000 \
